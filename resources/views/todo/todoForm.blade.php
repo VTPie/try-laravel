@@ -3,7 +3,7 @@
     $statusList = config("todo.status");
 @endphp
 @extends('base')
-@section('title', 'TODO - Add')
+@section('title', $pageTitle)
 @section('content')
     <div class="container w-50">
         <h1 class="text-center text-primary text mt-2">{{$pageName}}</h1>

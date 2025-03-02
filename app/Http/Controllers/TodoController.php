@@ -43,9 +43,10 @@ class TodoController extends Controller
     }
 
     public function create(){
+        $pageTitle = 'TODO - Add';
         $pageName = 'Add new Todo';
         $targetRoute = route('todo.store');
-        return view('todo/todoForm', compact('pageName', 'targetRoute'));
+        return view('todo/todoForm', compact('pageName', 'targetRoute', 'pageTitle'));
     }
 
     public function store(TodoRequest $request){
@@ -66,12 +67,13 @@ class TodoController extends Controller
     }
 
     public function edit($id){
+        $pageTitle = 'TODO - Edit';
         // Redirect to the 404 page if no valid record is found.
         $todoInfo = TodoInfo::findOrFail($id);
         $pageName = 'Edit Todo';
         $targetRoute = route('todo.update', ['id' => $id]);
         $method = 'PUT';
-        return view('todo/todoForm', compact('todoInfo', 'pageName', 'targetRoute', 'method'));
+        return view('todo/todoForm', compact('todoInfo', 'pageName', 'targetRoute', 'method', 'pageTitle'));
     }
 
     public function update(TodoRequest $request, $id){
