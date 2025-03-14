@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 $prefixTodo = config("todo.prefix_url");
+$prefixPicture = config("picture.prefix_url");
 
 // Landing page
 Route::get('/', function () {
@@ -37,4 +38,25 @@ Route::prefix($prefixTodo)->group(function () {
 
     Route::delete('/destroy/{id}', [App\Http\Controllers\TodoController::class, 'destroy'])->where('id', '[0-9]+')
         ->name('todo.destroy');
+});
+
+//Picture route group
+Route::prefix($prefixPicture)->group(function () {
+    Route::get('/', [App\Http\Controllers\PictureController::class, 'index'])
+        ->name('picture.index');
+
+    Route::get('/create', [App\Http\Controllers\PictureController::class, 'create'])
+        ->name('picture.create');
+
+    Route::post('/store', [App\Http\Controllers\PictureController::class, 'store'])
+        ->name('picture.store');
+
+    Route::get('/edit/{id}', [App\Http\Controllers\PictureController::class, 'edit'])->where('id', '[0-9]+')
+        ->name('picture.edit');
+
+    Route::put('/update/{id}', [App\Http\Controllers\PictureController::class, 'update'])
+        ->name('picture.update');
+
+    Route::delete('/destroy/{id}', [App\Http\Controllers\PictureController::class, 'destroy'])->where('id', '[0-9]+')
+        ->name('picture.destroy');
 });
