@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 $prefixTodo = config("todo.prefix_url");
 $prefixPicture = config("picture.prefix_url");
+$prefixUser = config("user.prefix_url");
 
 // Landing page
 Route::get('/', function () {
@@ -59,4 +60,25 @@ Route::prefix($prefixPicture)->group(function () {
 
     Route::delete('/destroy/{id}', [App\Http\Controllers\PictureController::class, 'destroy'])->where('id', '[0-9]+')
         ->name('picture.destroy');
+});
+
+//User route group
+Route::prefix($prefixUser)->group(function () {
+    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])
+        ->name('user.index');
+
+    Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])
+        ->name('user.create');
+
+    Route::post('/store', [App\Http\Controllers\UserController::class, 'store'])
+        ->name('user.store');
+
+    Route::get('/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->where('id', '[0-9]+')
+        ->name('user.edit');
+
+    Route::put('/update/{id}', [App\Http\Controllers\UserController::class, 'update'])
+        ->name('user.update');
+
+    Route::delete('/destroy/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->where('id', '[0-9]+')
+        ->name('user.destroy');
 });
